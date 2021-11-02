@@ -124,6 +124,16 @@ public class Run {
                         p = new MCTSPlayer(seed, playerID++, mctsParams);
                         playerStr[i-4] = "MCTS";
                         break;
+                    case 9:
+                        MCTSParams mctsParamsB = new MCTSParams();
+                        mctsParamsB.stop_type = mctsParamsB.STOP_ITERATIONS;
+                        mctsParamsB.num_iterations = 200;
+                        mctsParamsB.rollout_depth = 12;
+
+                        mctsParamsB.heuristic_method = mctsParamsB.CUSTOM_HEURISTIC;
+                        p = new MCTSPlayer(seed, playerID++, mctsParamsB);
+                        playerStr[i-4] = "MCTS_CH_TO_AH";
+                        break;
                     default:
                         System.out.println("WARNING: Invalid agent ID: " + agentType );
                 }
@@ -167,7 +177,7 @@ public class Run {
 
             //Print the total runtime
             Instant runtime = instant2.minusMillis(instant.toEpochMilli());
-            System.out.println("Total Runtime: "+runtime.);
+            System.out.println("Total Runtime: "+runtime);
 
         } catch(Exception e) {
             e.printStackTrace();
