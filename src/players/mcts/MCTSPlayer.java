@@ -65,10 +65,8 @@ public class MCTSPlayer extends ParameterizedPlayer {
 
          */
 //
-        MCTSParams mctsParamsB = new MCTSParams();
-        if (gs.getTick() > 500){
-            //change heurstics
-            this.params.heuristic_method = mctsParamsB.ADVANCED_HEURISTIC;
+        if (gs.getTick() > 500&&this.params.CHANGE_HEURISTIC==true){
+            this.params.heuristic_method = this.params.ADVANCED_HEURISTIC;
         }
 //
 

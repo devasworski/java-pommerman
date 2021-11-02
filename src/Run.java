@@ -124,14 +124,17 @@ public class Run {
                         p = new MCTSPlayer(seed, playerID++, mctsParams);
                         playerStr[i-4] = "MCTS";
                         break;
-                    case 9:
-                        MCTSParams mctsParamsB = new MCTSParams();
-                        mctsParamsB.stop_type = mctsParamsB.STOP_ITERATIONS;
-                        mctsParamsB.num_iterations = 200;
-                        mctsParamsB.rollout_depth = 12;
 
-                        mctsParamsB.heuristic_method = mctsParamsB.CUSTOM_HEURISTIC;
-                        p = new MCTSPlayer(seed, playerID++, mctsParamsB);
+                        // MCTS with changing heurist
+                    case 9:
+                        MCTSParams mctsCHParams = new MCTSParams();
+                        mctsCHParams.stop_type = mctsCHParams.STOP_ITERATIONS;
+                        mctsCHParams.num_iterations = 200;
+                        mctsCHParams.rollout_depth = 12;
+                        mctsCHParams.CHANGE_HEURISTIC = true;
+
+                        mctsCHParams.heuristic_method = mctsCHParams.CUSTOM_HEURISTIC;
+                        p = new MCTSPlayer(seed, playerID++, mctsCHParams);
                         playerStr[i-4] = "MCTS_CH_TO_AH";
                         break;
                     default:
