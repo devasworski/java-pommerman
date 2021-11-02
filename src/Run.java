@@ -7,6 +7,8 @@ import players.rhea.utils.Constants;
 import players.rhea.utils.RHEAParams;
 import utils.*;
 
+import java.sql.Timestamp;
+import java.time.Instant;
 import java.util.*;
 
 import static utils.Types.VISUALS;
@@ -151,7 +153,22 @@ public class Run {
             }
             System.out.println("]");
 
+            //Print the start time of the run
+            Date date = new Date();
+            Instant instant = date.toInstant();
+            System.out.println("Start Time " + instant);
+
             runGames(game, seeds, N, false);
+
+            //Print the end time of the run
+            Timestamp timestamp = new Timestamp(System.currentTimeMillis());
+            Instant instant2 = timestamp.toInstant();
+            System.out.println("End Time " + instant2);
+
+            //Print the total runtime
+            Instant runtime = instant2.minusMillis(instant.toEpochMilli());
+            System.out.println("Total Runtime: "+runtime);
+
         } catch(Exception e) {
             e.printStackTrace();
             printHelp();
