@@ -34,8 +34,6 @@ public class MCTSParams implements ParameterSet {
     public int num_fmcalls = 2000;
     public int num_time = 40;
 
-    //NEW Params
-    public  boolean CHANGE_HEURISTIC = false;
 
     @Override
     public void setParameterValue(String param, Object value) {

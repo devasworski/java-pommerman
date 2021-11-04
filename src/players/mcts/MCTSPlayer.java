@@ -57,19 +57,6 @@ public class MCTSPlayer extends ParameterizedPlayer {
     @Override
     public Types.ACTIONS act(GameState gs) {
 
-        /* MODIFIED
-        Initially after 500 ticks we decide to change the strategy to
-        be from the current version to an CUSTOM_HEURISTICS.
-        We modify the code below by obtain the current number of tick and switching strategy.
-        from the current strategy to a new strategy.
-
-         */
-//
-        if (gs.getTick() > 500&&this.params.CHANGE_HEURISTIC==true){
-            this.params.heuristic_method = this.params.ADVANCED_HEURISTIC;
-        }
-//
-
         // TODO update gs
         if (gs.getGameMode().equals(Types.GAME_MODE.TEAM_RADIO)){
             int[] msg = gs.getMessage();
