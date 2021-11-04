@@ -1,7 +1,10 @@
 import core.Game;
 import players.*;
+import players.custom_mcts.mcts.Custom_MCTSParams;
+import players.custom_mcts.mcts.Custom_MCTSPlayer;
 import players.mcts.MCTSParams;
 import players.mcts.MCTSPlayer;
+import players.custom_mcts.*;
 import players.rhea.RHEAPlayer;
 import players.rhea.utils.Constants;
 import players.rhea.utils.RHEAParams;
@@ -124,17 +127,28 @@ public class Run {
                         p = new MCTSPlayer(seed, playerID++, mctsParams);
                         playerStr[i-4] = "MCTS";
                         break;
+                        // our custom player
+                    case 6:
+                        Custom_MCTSParams custom_mctsParams = new Custom_MCTSParams();
+                        custom_mctsParams.stop_type = custom_mctsParams.STOP_ITERATIONS;
+                        custom_mctsParams.num_iterations = 200;
+                        custom_mctsParams.rollout_depth = 12;
+
+                        custom_mctsParams.heuristic_method = custom_mctsParams.CUSTOM_HEURISTIC;
+                        p = new Custom_MCTSPlayer(seed, playerID++, custom_mctsParams);
+                        playerStr[i-4] = "Custom_MCTS";
+                        break;
 
                         // MCTS with changing heuristic
                     case 9:
-                        MCTSParams mctsCHParams = new MCTSParams();
+                        Custom_MCTSParams mctsCHParams = new Custom_MCTSParams();
                         mctsCHParams.stop_type = mctsCHParams.STOP_ITERATIONS;
                         mctsCHParams.num_iterations = 200;
                         mctsCHParams.rollout_depth = 12;
                         mctsCHParams.CHANGE_HEURISTIC = true;
 
                         mctsCHParams.heuristic_method = mctsCHParams.CUSTOM_HEURISTIC;
-                        p = new MCTSPlayer(seed, playerID++, mctsCHParams);
+                        p = new Custom_MCTSPlayer(seed, playerID++, mctsCHParams);
                         playerStr[i-4] = "MCTS_CH_TO_AH";
                         break;
                     default:

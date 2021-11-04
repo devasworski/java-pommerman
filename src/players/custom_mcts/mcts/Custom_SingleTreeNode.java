@@ -13,12 +13,12 @@ import utils.Vector2d;
 import java.util.ArrayList;
 import java.util.Random;
 
-public class SingleTreeNode
+public class Custom_SingleTreeNode
 {
-    public MCTSParams params;
+    public Custom_MCTSParams params;
 
-    private SingleTreeNode parent;
-    private SingleTreeNode[] children;
+    private Custom_SingleTreeNode parent;
+    private Custom_SingleTreeNode[] children;
     private double totValue;
     private int nVisits;
     private Random m_rnd;
@@ -33,19 +33,19 @@ public class SingleTreeNode
     private GameState rootState;
     private StateHeuristic rootStateHeuristic;
 
-    SingleTreeNode(MCTSParams p, Random rnd, int num_actions, Types.ACTIONS[] actions) {
+    Custom_SingleTreeNode(Custom_MCTSParams p, Random rnd, int num_actions, Types.ACTIONS[] actions) {
         this(p, null, -1, rnd, num_actions, actions, 0, null);
     }
 
-    private SingleTreeNode(MCTSParams p, SingleTreeNode parent, int childIdx, Random rnd, int num_actions,
-                           Types.ACTIONS[] actions, int fmCallsCount, StateHeuristic sh) {
+    private Custom_SingleTreeNode(Custom_MCTSParams p, Custom_SingleTreeNode parent, int childIdx, Random rnd, int num_actions,
+                                  Types.ACTIONS[] actions, int fmCallsCount, StateHeuristic sh) {
         this.params = p;
         this.fmCallsCount = fmCallsCount;
         this.parent = parent;
         this.m_rnd = rnd;
         this.num_actions = num_actions;
         this.actions = actions;
-        children = new SingleTreeNode[num_actions];
+        children = new Custom_SingleTreeNode[num_actions];
         totValue = 0.0;
         this.childIdx = childIdx;
         if(parent != null) {
@@ -80,7 +80,7 @@ public class SingleTreeNode
 
             GameState state = rootState.copy();
             ElapsedCpuTimer elapsedTimerIteration = new ElapsedCpuTimer();
-            SingleTreeNode selected = treePolicy(state);
+            Custom_SingleTreeNode selected = treePolicy(state);
             double delta = selected.rollOut(state);
             backUp(selected, delta);
 
@@ -103,9 +103,9 @@ public class SingleTreeNode
         //System.out.println(" ITERS " + numIters);
     }
 
-    private SingleTreeNode treePolicy(GameState state) {
+    private Custom_SingleTreeNode treePolicy(GameState state) {
 
-        SingleTreeNode cur = this;
+        Custom_SingleTreeNode cur = this;
 
         while (!state.isTerminal() && cur.m_depth < params.rollout_depth)
         {
@@ -121,7 +121,7 @@ public class SingleTreeNode
     }
 
 
-    private SingleTreeNode expand(GameState state) {
+    private Custom_SingleTreeNode expand(GameState state) {
 
         int bestAction = 0;
         double bestValue = -1;
@@ -137,7 +137,7 @@ public class SingleTreeNode
         //Roll the state
         roll(state, actions[bestAction]);
 
-        SingleTreeNode tn = new SingleTreeNode(params,this,bestAction,this.m_rnd,num_actions,
+        Custom_SingleTreeNode tn = new Custom_SingleTreeNode(params,this,bestAction,this.m_rnd,num_actions,
                 actions, fmCallsCount, rootStateHeuristic);
         children[bestAction] = tn;
         return tn;
@@ -166,10 +166,10 @@ public class SingleTreeNode
 
     }
 
-    private SingleTreeNode uct(GameState state) {
-        SingleTreeNode selected = null;
+    private Custom_SingleTreeNode uct(GameState state) {
+        Custom_SingleTreeNode selected = null;
         double bestValue = -Double.MAX_VALUE;
-        for (SingleTreeNode child : this.children)
+        for (Custom_SingleTreeNode child : this.children)
         {
             double hvVal = child.totValue;
             double childValue =  hvVal / (child.nVisits + params.epsilon);
@@ -189,8 +189,7 @@ public class SingleTreeNode
         }
         if (selected == null)
         {
-            throw new RuntimeException("Warning! returning null: " + bestValue + " : " + this.children.length + " " +
-                    + bounds[0] + " " + bounds[1]);
+            throw new RuntimeException("Warning! returning null: " + bestValue + " : " + this.children.length + " " + bounds[0] + " " + bounds[1]);
         }
 
         //Roll the state:
@@ -252,9 +251,9 @@ public class SingleTreeNode
         return false;
     }
 
-    private void backUp(SingleTreeNode node, double result)
+    private void backUp(Custom_SingleTreeNode node, double result)
     {
-        SingleTreeNode n = node;
+        Custom_SingleTreeNode n = node;
         while(n != null)
         {
             n.nVisits++;
@@ -336,7 +335,7 @@ public class SingleTreeNode
 
 
     private boolean notFullyExpanded() {
-        for (SingleTreeNode tn : children) {
+        for (Custom_SingleTreeNode tn : children) {
             if (tn == null) {
                 return true;
             }

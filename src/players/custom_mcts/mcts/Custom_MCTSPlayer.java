@@ -9,7 +9,7 @@ import utils.Types;
 import java.util.ArrayList;
 import java.util.Random;
 
-public class MCTSPlayer extends ParameterizedPlayer {
+public class Custom_MCTSPlayer extends ParameterizedPlayer {
 
     /**
      * Random generator.
@@ -24,13 +24,13 @@ public class MCTSPlayer extends ParameterizedPlayer {
     /**
      * Params for this MCTS
      */
-    public MCTSParams params;
+    public Custom_MCTSParams params;
 
-    public MCTSPlayer(long seed, int id) {
-        this(seed, id, new MCTSParams());
+    public Custom_MCTSPlayer(long seed, int id) {
+        this(seed, id, new Custom_MCTSParams());
     }
 
-    public MCTSPlayer(long seed, int id, MCTSParams params) {
+    public Custom_MCTSPlayer(long seed, int id, Custom_MCTSParams params) {
         super(seed, id, params);
         reset(seed, id);
 
@@ -47,9 +47,9 @@ public class MCTSPlayer extends ParameterizedPlayer {
         super.reset(seed, playerID);
         m_rnd = new Random(seed);
 
-        this.params = (MCTSParams) getParameters();
+        this.params = (Custom_MCTSParams) getParameters();
         if (this.params == null) {
-            this.params = new MCTSParams();
+            this.params = new Custom_MCTSParams();
             super.setParameters(this.params);
         }
     }
@@ -65,7 +65,7 @@ public class MCTSPlayer extends ParameterizedPlayer {
 
          */
 //
-        if (gs.getTick() > 500&&this.params.CHANGE_HEURISTIC==true){
+        if (gs.getTick() > 500&&this.params.CHANGE_HEURISTIC){
             this.params.heuristic_method = this.params.ADVANCED_HEURISTIC;
         }
 //
@@ -82,7 +82,7 @@ public class MCTSPlayer extends ParameterizedPlayer {
         int num_actions = actions.length;
 
         // Root of the tree
-        SingleTreeNode m_root = new SingleTreeNode(params, m_rnd, num_actions, actions);
+        Custom_SingleTreeNode m_root = new Custom_SingleTreeNode(params, m_rnd, num_actions, actions);
         m_root.setRootGameState(gs);
 
         //Determine the action using MCTS...
@@ -107,6 +107,6 @@ public class MCTSPlayer extends ParameterizedPlayer {
 
     @Override
     public Player copy() {
-        return new MCTSPlayer(seed, playerID, params);
+        return new Custom_MCTSPlayer(seed, playerID, params);
     }
 }
