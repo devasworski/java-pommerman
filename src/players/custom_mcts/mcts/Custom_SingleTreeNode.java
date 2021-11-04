@@ -2,6 +2,7 @@ package players.custom_mcts.mcts;
 
 import core.GameState;
 import players.RandomPlayer;
+import players.SimplePlayer;
 import players.heuristics.AdvancedHeuristic;
 import players.heuristics.CustomHeuristic;
 import players.heuristics.StateHeuristic;
@@ -143,29 +144,36 @@ public class Custom_SingleTreeNode
         return tn;
     }
 
-    private void roll(GameState gs, Types.ACTIONS act)
-    {
+    private void roll(GameState gs, Types.ACTIONS act) {
         //Simple, all random first, then my position.
         int nPlayers = 4;
         Types.ACTIONS[] actionsAll = new Types.ACTIONS[4];
         int playerId = gs.getPlayerId() - Types.TILETYPE.AGENT0.getKey();
 
-        for(int i = 0; i < nPlayers; ++i)
-        {
-            if(playerId == i)
-            {
+        for (int i = 0; i < nPlayers; ++i) {
+            if (playerId == i) {
                 actionsAll[i] = act;
-            }else {
+            } else {
                 //simulate RandomPlayer instead of random action, to outrule illegal actions
-                RandomPlayer ran = new RandomPlayer(0, playerId);
-                actionsAll[i] = ran.act(gs);
+//                RandomPlayer ran = new RandomPlayer(0, playerId);
+//                actionsAll[i] = ran.act(gs);
+                int ran_num = m_rnd.nextInt(100);
+                if (ran_num < 80) {
+                    RandomPlayer ran = new RandomPlayer(0, playerId);
+                    actionsAll[i] = ran.act(gs);
+
+                } else {
+                    SimplePlayer sim = new SimplePlayer(0, playerId);
+                    actionsAll[i] = sim.act(gs);
+
+
+                }
             }
+
+            gs.next(actionsAll);
+
         }
-
-        gs.next(actionsAll);
-
     }
-
     private Custom_SingleTreeNode uct(GameState state) {
         Custom_SingleTreeNode selected = null;
         double bestValue = -Double.MAX_VALUE;
