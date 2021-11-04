@@ -1,6 +1,7 @@
 package players.mcts;
 
 import core.GameState;
+import players.RandomPlayer;
 import players.heuristics.AdvancedHeuristic;
 import players.heuristics.CustomHeuristic;
 import players.heuristics.StateHeuristic;

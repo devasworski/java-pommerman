@@ -125,7 +125,7 @@ public class Run {
                         playerStr[i-4] = "MCTS";
                         break;
 
-                        // MCTS with changing heurist
+                        // MCTS with changing heuristic
                     case 9:
                         MCTSParams mctsCHParams = new MCTSParams();
                         mctsCHParams.stop_type = mctsCHParams.STOP_ITERATIONS;
