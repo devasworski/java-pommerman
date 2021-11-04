@@ -4,7 +4,6 @@ import players.custom_mcts.mcts.Custom_MCTSParams;
 import players.custom_mcts.mcts.Custom_MCTSPlayer;
 import players.mcts.MCTSParams;
 import players.mcts.MCTSPlayer;
-import players.custom_mcts.*;
 import players.rhea.RHEAPlayer;
 import players.rhea.utils.Constants;
 import players.rhea.utils.RHEAParams;
