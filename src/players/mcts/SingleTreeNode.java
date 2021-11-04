@@ -1,6 +1,7 @@
 package players.mcts;
 
 import core.GameState;
+import players.RandomPlayer;
 import players.heuristics.AdvancedHeuristic;
 import players.heuristics.CustomHeuristic;
 import players.heuristics.StateHeuristic;
@@ -155,8 +156,10 @@ public class SingleTreeNode
             {
                 actionsAll[i] = act;
             }else {
-                int actionIdx = m_rnd.nextInt(gs.nActions());
-                actionsAll[i] = Types.ACTIONS.all().get(actionIdx);
+                // int actionIdx = m_rnd.nextInt(gs.nActions());
+                RandomPlayer ran = new RandomPlayer(0, playerId);
+                actionsAll[i] = ran.act(gs);
+                // actionsAll[i] = Types.ACTIONS.all().get(actionIdx);
             }
         }
 
