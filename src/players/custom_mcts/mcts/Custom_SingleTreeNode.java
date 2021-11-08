@@ -154,25 +154,20 @@ public class Custom_SingleTreeNode
             if (playerId == i) {
                 actionsAll[i] = act;
             } else {
-                //simulate RandomPlayer instead of random action, to outrule illegal actions
-//                RandomPlayer ran = new RandomPlayer(0, playerId);
-//                actionsAll[i] = ran.act(gs);
                 int ran_num = m_rnd.nextInt(100);
                 if (ran_num < 80) {
+                    // simulate RandomPlayer instead of random action, to outrule illegal actions
+                    // in about 80% of the time, the random player will be used for opponent modeling
                     RandomPlayer ran = new RandomPlayer(0, playerId);
                     actionsAll[i] = ran.act(gs);
-
                 } else {
+                    // In around 20% of the time, the Simple Player will be used for opponent modeling. This allows to prunne the MCTS search tree slighty
                     SimplePlayer sim = new SimplePlayer(0, playerId);
                     actionsAll[i] = sim.act(gs);
-
-
                 }
             }
-
-            gs.next(actionsAll);
-
         }
+        gs.next(actionsAll);
     }
     private Custom_SingleTreeNode uct(GameState state) {
         Custom_SingleTreeNode selected = null;

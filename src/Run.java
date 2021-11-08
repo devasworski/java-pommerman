@@ -128,13 +128,14 @@ public class Run {
                         break;
                         // our custom player
                     case 6:
-                        Custom_MCTSParams custom_mctsParams = new Custom_MCTSParams();
-                        custom_mctsParams.stop_type = custom_mctsParams.STOP_ITERATIONS;
-                        custom_mctsParams.num_iterations = 200;
-                        custom_mctsParams.rollout_depth = 12;
+                        //Custom_MCTSParams custom_mctsParams = new Custom_MCTSParams();
+                        //custom_mctsParams.stop_type = custom_mctsParams.STOP_TIME;
+                        //custom_mctsParams.num_iterations = 200;
+                        //custom_mctsParams.rollout_depth = 12;
+                        //custom_mctsParams.CHANGE_HEURISTIC = false;
 
-                        custom_mctsParams.heuristic_method = custom_mctsParams.CUSTOM_HEURISTIC;
-                        p = new Custom_MCTSPlayer(seed, playerID++, custom_mctsParams);
+                        //custom_mctsParams.heuristic_method = custom_mctsParams.CUSTOM_HEURISTIC;
+                        p = new Custom_MCTSPlayer(seed, playerID++);
                         playerStr[i-4] = "Custom_MCTS";
                         break;
 
@@ -184,7 +185,9 @@ public class Run {
             Instant instant = date.toInstant();
             System.out.println("Start Time " + instant);
 
-            runGames(game, seeds, N, false);
+            // use SepareteThreads default: == false
+            // for testing this was set to true, conducting experiemnts with REHA, this could cut the runtime in half, for MCTS the runtime was just one third
+            runGames(game, seeds, N, true);
 
             //Print the end time of the run
             Timestamp timestamp = new Timestamp(System.currentTimeMillis());

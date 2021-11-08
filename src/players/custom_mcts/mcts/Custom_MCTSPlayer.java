@@ -59,10 +59,10 @@ public class Custom_MCTSPlayer extends ParameterizedPlayer {
 
         /* MODIFIED
         Initially after 500 ticks we decide to change the strategy to
-        be from the current version to an CUSTOM_HEURISTICS.
+        be from the current version to an ADVANCED_HEURISTICS.
         We modify the code below by obtain the current number of tick and switching strategy.
         from the current strategy to a new strategy.
-
+        The heuristic will only change if MCTSParam CHANGE_HEURISTIC is true
          */
 //
         if (gs.getTick() > 500&&this.params.CHANGE_HEURISTIC){

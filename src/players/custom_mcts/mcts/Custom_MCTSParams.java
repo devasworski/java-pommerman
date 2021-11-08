@@ -1,5 +1,10 @@
 package players.custom_mcts.mcts;
 
+/*
+This class has not been copied from the original MCTSParams.java file, that could be found in the starting project.
+On top of the base functions, this class also proved a parameter, which is in default set false, to change the heuristic during the game.
+ */
+
 import players.optimisers.ParameterSet;
 import utils.Pair;
 
@@ -25,16 +30,17 @@ public class Custom_MCTSParams implements ParameterSet {
 
     // Parameters
     public double K = Math.sqrt(2);
-    public int rollout_depth = 8;//10;
+    public int rollout_depth = 20;//10;
     public int heuristic_method = CUSTOM_HEURISTIC;
 
     // Budget settings
-    public int stop_type = STOP_TIME;
+    public int stop_type = STOP_ITERATIONS;
     public int num_iterations = 200;
     public int num_fmcalls = 2000;
-    public int num_time = 40;
+    public int num_time = 100;
 
     //NEW Params
+    //CHANGE_HEURISTIC is used by Custom_MCTSPlayer.act() to determine if the Heuristic should be changed after 500 game ticks
     public  boolean CHANGE_HEURISTIC = false;
 
     @Override
