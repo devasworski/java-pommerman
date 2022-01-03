@@ -4,13 +4,13 @@
 <img src="https://external-content.duckduckgo.com/iu/?u=http%3A%2F%2Fwww.bilingualism-matters.ppls.ed.ac.uk%2Fwp-content%2Fuploads%2F2014%2F11%2Fqueen-mary-logo.jpg&f=1&nofb=1" height=130>
 
 
-Module Leader: Diego Perez-Liebana &
+Module Leader: Diego Perez-Liebana
 
 Semester 1 
 
 Due: 8th November 2021.
 
-#### Final Mark: ? (??/100)
+#### Final Mark: Distinction
 
 Group Members: Alexander Sworski, Patric Levermore, Dominic Muthumbi Nzimi
 
